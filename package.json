@@ -1,0 +1,19 @@
+{
+  "name": "protoporo",
+  "version": "1.0.0",
+  "description": "will parse Legends of Runeterra deck codes sent into a discord server",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "discord",
+    "bot"
+  ],
+  "author": "kaixokkiten",
+  "license": "GPL-3.0-or-later",
+  "dependencies": {
+    "discord.js": "^13.1.0",
+    "lor-deckcodes-ts": "^1.0.4"
+  }
+}
