@@ -1,0 +1,8 @@
+version: '3.2'
+services:
+  bot:
+    image: node:16
+    restart: always
+    volumes:
+      - .:/app/src:ro
+    entrypoint: /app/src/entrypoint.sh
