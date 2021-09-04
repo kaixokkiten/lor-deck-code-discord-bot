@@ -21,6 +21,10 @@ client.on('message', message => {
         message.channel.send("pong");
         console.log("pong");
     }
+    if (message.content === "[pong]") {
+        message.channel.send("ping");
+        console.log("ping");
+    }
 });
 
 client.on('message', message => {
