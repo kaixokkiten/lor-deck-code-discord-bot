@@ -37,6 +37,7 @@ client.on('message', message => {
             .map(e =>"- "+e.count+" "+"("+e.card.cost+") "+e.card.name);
         let decklist = deck.join("\n");
 
+        
         message.channel.send(deckCode.value[1]+"\n"+decklist);
     }
 });
