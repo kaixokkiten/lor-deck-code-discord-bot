@@ -31,13 +31,15 @@ client.on('message', message => {
 client.on('message', message => {
     let deckCode = message.content.matchAll(/\[([A-Z0-9]+)\]/g).next();
     if (deckCode.value) {
-        console.log(lor.getDeckFromCode(deckCode.value[1]));
         let deck = (lor.getDeckFromCode(deckCode.value[1]))
-            .map(e => ({card:sets[+e.cardCode.slice(0, 2)-1].find(card => e.cardCode == card.cardCode), count:e.count}))
+            .map(e => {
+              let card = sets[+e.cardCode.slice(0, 2)-1].find(card => e.cardCode == card.cardCode);
+              if (!card) card = {cost: 0, name: "Unknown " + e.cardCode};
+              return {card, count: e.count};
+            })
             .sort((a, b) => b.card.cost - a.card.cost)
             .map(e =>"- "+e.count+" "+"("+e.card.cost+") "+e.card.name);
         let decklist = deck.join("\n");
-
         
         message.channel.send(deckCode.value[1]+"\n"+decklist);
     }
