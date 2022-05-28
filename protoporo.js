@@ -6,8 +6,9 @@ const set2 = require('./set2-en_us.json');
 const set3 = require('./set3-en_us.json');
 const set4 = require('./set4-en_us.json');
 const set5 = require('./set5-en_us.json');
+const set6 = require('./set6-en_us.json');
 
-const sets = [set1, set2, set3, set4, set5];
+const sets = [set1, set2, set3, set4, set5, set6];
 
 var auth = require('./auth.json');
 const lor = require('lor-deckcodes-ts');
