@@ -6,8 +6,9 @@ const set2 = require('./set2-en_us.json');
 const set3 = require('./set3-en_us.json');
 const set4 = require('./set4-en_us.json');
 const set5 = require('./set5-en_us.json');
+const set6 = require('./set6-en_us.json');
 
-const sets = [set1, set2, set3, set4, set5];
+const sets = [set1, set2, set3, set4, set5, set6];
 
 var auth = require('./auth.json');
 const lor = require('lor-deckcodes-ts');
@@ -30,13 +31,15 @@ client.on('message', message => {
 client.on('message', message => {
     let deckCode = message.content.matchAll(/\[([A-Z0-9]+)\]/g).next();
     if (deckCode.value) {
-        console.log(lor.getDeckFromCode(deckCode.value[1]));
         let deck = (lor.getDeckFromCode(deckCode.value[1]))
-            .map(e => ({card:sets[+e.cardCode.slice(0, 2)-1].find(card => e.cardCode == card.cardCode), count:e.count}))
+            .map(e => {
+              let card = sets[+e.cardCode.slice(0, 2)-1].find(card => e.cardCode == card.cardCode);
+              if (!card) card = {cost: 0, name: "Unknown " + e.cardCode};
+              return {card, count: e.count};
+            })
             .sort((a, b) => b.card.cost - a.card.cost)
             .map(e =>"- "+e.count+" "+"("+e.card.cost+") "+e.card.name);
         let decklist = deck.join("\n");
-
         
         message.channel.send(deckCode.value[1]+"\n"+decklist);
     }
