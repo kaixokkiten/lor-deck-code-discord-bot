@@ -7,6 +7,7 @@ const set3 = require('./set3-en_us.json');
 const set4 = require('./set4-en_us.json');
 const set5 = require('./set5-en_us.json');
 const set6 = require('./set6-en_us.json');
+const set6 = require('./set6cde-en_us.json');
 
 const sets = [set1, set2, set3, set4, set5, set6];
 
