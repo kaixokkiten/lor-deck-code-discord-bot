@@ -10,6 +10,9 @@ const set6 = require('./set6-en_us.json');
 const set6cde = require('./set6cde-en_us.json');
 
 const sets = [set1, set2, set3, set4, set5, set6, set6cde];
+const cards = new Map();
+
+for (const set of sets) for (const card of set) cards.set(card.cardCode, card);
 
 var auth = require('./auth.json');
 const lor = require('lor-deckcodes-ts');
@@ -34,7 +37,7 @@ client.on('message', message => {
     if (deckCode.value) {
         let deck = (lor.getDeckFromCode(deckCode.value[1]))
             .map(e => {
-              let card = sets[+e.cardCode.slice(0, 2)-1].find(card => e.cardCode == card.cardCode);
+              let card = cards.get(e.cardCode);
               if (!card) card = {cost: 0, name: "Unknown " + e.cardCode};
               return {card, count: e.count};
             })
